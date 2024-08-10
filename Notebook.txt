@@ -12,6 +12,4 @@ with mlflow.start_run():
   mlflow.log_metric('metric name', 1)
 
 
-  access key : AKIA4CSEE4W4DSBYUUNB
-
-  secret key : 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
+  #
