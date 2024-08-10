@@ -1,0 +1,6 @@
+[core]
+    remote = temp
+['remote "myremote"']
+    url = D:\mlops-mini-project\mlops-mini-project\temp
+['remote "temp"']
+    url = D:\mlops-mini-project\mlops-mini-project\temp

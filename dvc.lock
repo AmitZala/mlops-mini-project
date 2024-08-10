@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data/data_ingestion.py
+    deps:
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: ee08a4c31ae467cebbcce70b5cc5491a
+      size: 3545
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.15
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: 9096031b858a2cbb24cca78d3ce8a538.dir
+      size: 827973
+      nfiles: 2
+  data_preprocessing:
+    cmd: python src/data/data_preprocessing.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 9096031b858a2cbb24cca78d3ce8a538.dir
+      size: 827973
+      nfiles: 2
+    - path: src/data/data_preprocessing.py
+      hash: md5
+      md5: c1e18bf95fcc1e3d80cae9ee7c4a6383
+      size: 4014
+    outs:
+    - path: data/interim
+      hash: md5
+      md5: 5cad21fa0d9bde3de854f3c73c78db35.dir
+      size: 572486
+      nfiles: 2
+  feature_engineering:
+    cmd: python src/features/feature_engineering.py
+    deps:
+    - path: data/interim
+      hash: md5
+      md5: 5cad21fa0d9bde3de854f3c73c78db35.dir
+      size: 572486
+      nfiles: 2
+    - path: src/features/feature_engineering.py
+      hash: md5
+      md5: c1888aef256c204017522c2ce5fd36a0
+      size: 3883
+    params:
+      params.yaml:
+        feature_engineering.max_features: 3500
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 703c3c74e0464897662e9217ab1d36c0.dir
+      size: 72681916
+      nfiles: 2
+    - path: models/vectorizer.pkl
+      hash: md5
+      md5: 1eaf1d936389ce558ada7d939d4499cc
+      size: 83113
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 703c3c74e0464897662e9217ab1d36c0.dir
+      size: 72681916
+      nfiles: 2
+    - path: src/model/model_building.py
+      hash: md5
+      md5: 809681a98d52938b43c9befd0b00a422
+      size: 2373
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: da9ba8b20473be6ed0176ee0fba683f7
+      size: 28716
