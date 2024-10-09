@@ -1,4 +1,2 @@
 [core]
-    remote = myremote
-['remote "myremote"']
-    url = D:\mlops-mini-project\mlops-mini-project\temp
+    autostage = true
